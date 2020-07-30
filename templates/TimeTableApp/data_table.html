@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'TimeTableApp/base.html' %}
+{% load crispy_forms_tags %}
+{% load my_filters %}
+
+
+
+{% block content %}
+
+
+  <section id="main" class="pb-3">
+    <div class="container my-3" style="overflow-x:auto;">
+      <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center text-success">{{ table_name }}</h2>
+            <form class="" method="get" action="{% url 'edittable' pk=T.id %}" id="data_table">
+            <table class="table table-bordered table-hover" >
+              <thead class="table-danger">
+                <tr>
+                  {% for item in header  %}
+                  <th> {{item}} </th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for items in r %}
+                <tr id='myRow'>
+                  {% for item in items %}
+                  <td> {{ item }} </td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+              <button type="button" name="button" class="btn btn-success form-control-lg btn-md mx-3 text-white" onclick="data_table.submit()">Edit My Table</button>
+              <button type="button" name="button" class="btn btn-success form-control-lg btn-md mx-4"> <a href="{% url 'deleted' pk=T.id %}" class="text-white">Delete Table</a> </button>
+
+              <input type="hidden" name="a" value="{{row}}">
+              <input type="hidden" name="b" value="{{col}}">
+            </form>
+
+        </div>
+
+          </div>
+
+        </div>
+  </section>
+
+{% endblock %}

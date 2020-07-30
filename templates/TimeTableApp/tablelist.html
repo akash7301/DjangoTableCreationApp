@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% extends 'TimeTableApp/base.html' %}
+{% load crispy_forms_tags %}
+{% load my_filters %}
+
+
+{% block style %}
+th,td {
+  text-align: center;
+}
+.t5{
+  background-color: rgb(100,132,11);
+  color: white;
+}
+.t0{
+  background-color: rgb(23,32,211);
+  color: white;
+}
+th {
+  background-color: rgb(223,32,211);
+  color: white;
+}
+table,th,td{
+  border: 1px solid black;
+}
+tr:hover {background-color: #AFA;}
+
+{% endblock %}
+
+{% block content %}
+
+  <h2 class="text-center text-success my-3">Here your All Tables</h2>
+  <section id="main">
+    <div class="container my-5" style="overflow-x:auto;">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+            {% for table in all_table %}
+            <h2 class="text-center text-warning pt-2">{{ table.5 }}</h2>
+            <form class="my-2" method="get" action="{% url 'edittable' pk=table.4%}" id="data_table{{forloop.counter0}}">
+              <div style="overflow-x:auto;">
+
+
+            <table class="table table-bordered" >
+              <thead class="table-danger">
+                <tr>
+                  {% for item in table.0  %}
+                  <th> {{item}} </th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for items in table.1 %}
+                <tr id='myRow{{forloop.counter0}}'>
+                  {% for item in items %}
+                  <td class="t{{forloop.counter0}}"> {{ item }} </td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            </div>
+              <button type="button" name="button" class="btn btn-success form-control-lg btn-md mx-3" onclick="data_table{{forloop.counter0}}.submit()">Edit My Table</button>
+              <button type="button" name="button" class="btn btn-success form-control-lg btn-md mx-3"> <a href="{% url 'deleted' pk=table.4 %}" class="text-white">Delete Table</a> </button>
+
+
+              <input type="hidden" name="a" value="{{table.2}}">
+              <input type="hidden" name="b" value="{{table.3}}">
+
+            </form>
+            {% endfor %}
+        </div>
+
+          </div>
+        </div>
+  </section>
+{% endblock %}

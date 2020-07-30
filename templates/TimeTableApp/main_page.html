@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'TimeTableApp/base.html' %}
+{% load crispy_forms_tags %}
+{% load my_filters %}
+
+{% block content %}
+
+
+  <section id="main">
+    <h3 class="mx-3 my-3 text-center text-warning">Create Your First Table Here</h3>
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+          <div class="card">
+            <h3 class="mx-2 my-2">Please Enter numer of rows and columns </h3>
+            <form class="form" id="entryform" action="{% url 'create' %}" method="get">
+              <div class="form-group">
+                <input type="number" name="row" placeholder="Rows" class="mx-4 my-3 col-5 form-control-lg">
+                <input type="number" name="col" placeholder="columns" class="mx-4 my-3 col-5 form-control-lg">
+                <button type="button" name="button" class="btn btn-primary form-control-lg btn-lg" onclick="entryform.submit()">Create Empty Table</button>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+<!--
+{% block javascript %}
+
+<script type="text/javascript">
+  function change_table(x){
+    alert(x)
+    t1 = document.getElementById('t_1');
+    t2 = document.getElementById('t_2');
+    t3 = document.getElementById('t_3');
+    if (x == 1){
+      t1.setAttribute("visiable",'hidden');
+      t2.setAttribute("visiable",'visible');
+      t3.setAttribute("visiable",'hidden');
+      alert('table 2 visible')
+    }
+    else if(x==2){
+      t1.setAttribute("visiable",'hidden');
+      t2.setAttribute("visiable",'hidden');
+      t3.setAttribute("visiable",'visible');
+      alert('table 3 visiable')
+    }
+    else{
+      t1.setAttribute("visiable",'visible');
+      t2.setAttribute("visiable",'hidden');
+      t3.setAttribute("visiable",'hidden');
+      alert('table 1 visible')
+    }
+
+  }
+</script>
+{% endblock javascript %}
+
+document.getElementsByTagName("H1")[0].setAttribute("class", "democlass"); -->

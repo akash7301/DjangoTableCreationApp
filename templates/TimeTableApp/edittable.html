@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% extends 'TimeTableApp/base.html' %}
+{% load crispy_forms_tags %}
+{% load my_filters %}
+
+{% block content %}
+
+
+  <section id="main" class="pb-3">
+    <div class="container my-5" style="overflow-x:auto;">
+      <div class="row">
+        <div class="col-md-3">
+              <form class="form" action="{% url 'updated' pk=T.id %}" method="get" id="edit_table">
+                <table class="table table-bordered table-hover" id="my-table">
+                  <thead>
+                    <tr>
+
+                      {% for item in header %}
+                      <th> <input type="text" name="h{{forloop.counter0}}" value="{{item}}"> </th>
+                      {% endfor %}
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for items in r %}
+                    <tr id="myRow{{forloop.counter0}}">
+                      {% with forloop.counter0 as outer_counter %}
+                      {% for item in items %}
+
+                      <td> <input type="text" name="d{{outer_counter}}{{forloop.counter0}}" value="{{item}}"> </td>
+
+                      {% endfor %}
+                        {% endwith %}
+                    </tr>
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-md-4 mx-4">
+                    <button type="button" name="button" class="btn btn-success form-control-lg btn-md my-2" onclick="edit_table.submit()">Update Table</button>
+                  </div>
+                  <div class="col-md-4 mx-4">
+                      <button type="button" name="button" class="btn btn-success form-control-lg btn-md my-2" onclick="appendRow()">Add New Row</button>
+                  </div>
+                  <div class="col-md-4 mx-2">
+                    <button type="button" name="button" class="btn btn-success form-control-lg btn-md my-2" onclick="appendColumn()">Add New Col</button>
+                  </div>
+                </div>
+                <input type="hidden" name="a" value="{{row}}" id="row_val">
+                <input type="hidden" name="b" value="{{col}}" id="col_val">
+              </form>
+
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+
+function appendRow() {
+  var tbl = document.getElementById('my-table'),
+      row = tbl.insertRow(tbl.rows.length),
+      i;
+  value = tbl.rows.length
+
+  for (i = 0; i < tbl.rows[0].cells.length; i++) {
+      createCell(row.insertCell(i), i, 'row', value);
+  }
+  var r = document.getElementById('row_val')
+  r.setAttribute('value',value-1)
+}
+
+
+function createCell(cell, text, style, value) {
+  var div = document.createElement('input'),
+      txt = document.createTextNode(text-2);
+  div.appendChild(txt);
+  div.setAttribute('type', 'text');
+  div.setAttribute('name', 'd'+(value-2)+text);
+  div.setAttribute('value', "new")
+  cell.appendChild(div);
+
+}
+function appendColumn(){
+  alert('This functionality is under development,sorry for inconvenient !!')
+}
+
+// function createCell1(cell, text, style, value) {
+//   var div = document.createElement('input'),
+//       txt = document.createTextNode(text);
+//   div.appendChild(txt);
+//   div.setAttribute('type', 'text');
+//   div.setAttribute('name', 'd'+(text-1)+value);
+//   div.setAttribute('value', "new")
+//   cell.appendChild(div);
+//
+// }
+//
+//
+//
+// function appendColumn() {
+//     var tbl = document.getElementById('my-table'),
+//         i;
+//     val = tbl.rows.length
+//
+//     for (i = 0; i < tbl.rows.length; i++) {
+//         createCell1(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i, 'col',val-2);
+//         console.log(i)
+//     }
+//
+// }
+// </script>
+{% endblock javascript %}

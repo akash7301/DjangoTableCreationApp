@@ -1,0 +1,6 @@
+using Django 3.0.8
+bootstrapcdn
+used crispy_forms #pip install django-crispy-forms
+HTML5
+javascript
+CSS3

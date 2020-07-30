@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'TimeTableApp/base.html' %}
+{% load crispy_forms_tags %}
+{% load my_filters %}
+
+{% block content %}
+<div class="bg-warning">
+  <h3 class="text-center text-primary py-3">Please Enter your table data First row should be Heading</h3><hr>
+</div>
+
+  <section id="main" class="pb-3">
+
+    <div class="container my-3" style="overflow-x:auto;">
+      <div class="row">
+        <div class="col-sm-3 mb-3">
+
+
+              <form class="form" action="{% url 'created' %}" method="get" id="empty_table">
+                <input type="text" name="table_name" value="" class="form-control-lg mx-3" placeholder="Enter name of table">
+
+
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      {% for i in col|times %}
+                      <th> <input type="text" name="h{{i}}" value=""> </th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for r in row|times %}
+                    <tr>
+                      {% for c in col|times %}
+                      <td> <input type="text" name="d{{r}}{{c}}" value=""> </td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <button type="button" name="button" class="btn btn-success form-control-lg btn-lg" onclick="empty_table.submit()">Create My Table</button>
+                <input type="hidden" name="a" value="{{row}}">
+                <input type="hidden" name="b" value="{{col}}">
+              </form>
+
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+{% endblock %}
