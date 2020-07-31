@@ -92,29 +92,36 @@ function appendColumn(){
   alert('This functionality is under development,sorry for inconvenient !!')
 }
 
-// function createCell1(cell, text, style, value) {
-//   var div = document.createElement('input'),
-//       txt = document.createTextNode(text);
-//   div.appendChild(txt);
-//   div.setAttribute('type', 'text');
-//   div.setAttribute('name', 'd'+(text-1)+value);
-//   div.setAttribute('value', "new")
-//   cell.appendChild(div);
-//
-// }
-//
-//
-//
-// function appendColumn() {
-//     var tbl = document.getElementById('my-table'),
-//         i;
-//     val = tbl.rows.length
-//
-//     for (i = 0; i < tbl.rows.length; i++) {
-//         createCell1(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i, 'col',val-2);
-//         console.log(i)
-//     }
-//
-// }
-// </script>
+function createCell1(cell, text, style,val1) {
+  var div = document.createElement('input'),
+      txt = document.createTextNode(text);
+  div.appendChild(txt);
+  div.setAttribute('type', 'text');
+  if (text == 0){
+    div.setAttribute('name','h'+val1);
+  }
+  else{
+      div.setAttribute('name', 'd'+(text-1)+val1);
+  }
+
+  div.setAttribute('value', "new")
+  cell.appendChild(div);
+}
+
+
+
+
+function appendColumn() {
+    var tbl = document.getElementById('my-table'),
+        i;
+    val1 = tbl.rows[0].cells.length
+    var r = document.getElementById('col_val')
+    r.setAttribute('value',val1+1)
+    for (i = 0; i < tbl.rows.length; i++) {
+        createCell1(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i, 'col',val1);
+        //console.log(i)
+    }
+
+}
+</script>
 {% endblock javascript %}
